@@ -23,7 +23,7 @@ public class ImageController {
     }
 
     @GetMapping("{id}")
-    public ImageMetadataRequest getImageById(@PathVariable("id") String itemId) {
+    public ImageMetadataEntity getImageById(@PathVariable("id") Long itemId) {
         return this.imageService.getImageById(itemId);
     }
 

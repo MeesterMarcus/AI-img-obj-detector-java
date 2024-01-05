@@ -1,6 +1,7 @@
 package com.marcuslorenzana.imageobjectdetector.services;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.marcuslorenzana.imageobjectdetector.constants.ImaggaConstants;
 import com.marcuslorenzana.imageobjectdetector.entities.ImageMetadataEntity;
 import com.marcuslorenzana.imageobjectdetector.entities.ObjectEntity;
 import com.marcuslorenzana.imageobjectdetector.mappers.ImageMetadataRequestToImageMetadataEntityMapper;
@@ -59,7 +60,8 @@ public class ImaggaAPIService {
 
     private String getTagsUrl(String imageSource) {
         String tagsBaseUrl =  String.format("%s/v2/tags", imaggaBaseUrl);
-        return tagsBaseUrl + "?image_url=" + imageSource + "&limit=5&threshold=9";
+        return tagsBaseUrl + "?image_url=" + imageSource + "&limit=" + ImaggaConstants.TAG_LIMIT +
+                "&threshold=" + ImaggaConstants.CONFIDENCE_THRESHOLD;
     }
 
     private List<ImaggaApiTagItem> retrieveTagsFromResponse(String jsonResponse) {
@@ -69,7 +71,7 @@ public class ImaggaAPIService {
             List<ImaggaApiTagItem> tags = apiResponse.getResult().getTags();
             return tags;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("Error trying to retrieve objects from image");
             return null;
         }
     }

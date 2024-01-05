@@ -5,6 +5,7 @@ import com.marcuslorenzana.imageobjectdetector.entities.ObjectEntity;
 import com.marcuslorenzana.imageobjectdetector.models.ImageMetadataRequest;
 import com.marcuslorenzana.imageobjectdetector.repositories.ImageMetadataEntityRepository;
 import com.marcuslorenzana.imageobjectdetector.repositories.ObjectEntityRepository;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 import org.slf4j.Logger;
@@ -12,6 +13,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ImageService {
@@ -44,14 +46,21 @@ public class ImageService {
         return images;
     }
 
-    public ImageMetadataRequest getImageById(String itemId) {
-        return null;
+    public ImageMetadataEntity getImageById(long id) {
+        Optional<ImageMetadataEntity> entity = this.imageMetadataEntityRepository.findById(id);
+        if (entity.isPresent()) {
+            return entity.get(); // If the entity is present, return it
+        } else {
+            logger.info("Could not find the image with ID " + id + " in the DB.");
+            return null;
+        }
     }
+
 
     @Transactional
     public ImageMetadataEntity createImage(ImageMetadataRequest image) {
         ImageMetadataEntity entity = this.imaggaAPIService.retrieveObjectsFromImage(image);
-        List<ObjectEntity> objectEntities =this.objectEntityRepository.saveAllAndFlush(entity.getObjects());
+        List<ObjectEntity> objectEntities = this.objectEntityRepository.saveAllAndFlush(entity.getObjects());
         List<ObjectEntity> objectEntitiesCommitted = this.objectEntityRepository.findAll();
         logger.info("lets see if they are there...");
         logger.info(objectEntitiesCommitted.toString());
@@ -59,16 +68,4 @@ public class ImageService {
         this.imageMetadataEntityRepository.saveAndFlush(entity);
         return entity;
     }
-
-//    private List<ObjectEntity> retrieveUniqueObjects(List<ObjectEntity> objectEntities) {
-//        List<ObjectEntity> uniqueObjects = new ArrayList<>();
-//        for (ObjectEntity newObject : objectEntities) {
-//            List<ObjectEntity> existingObject = objectEntityRepository.findByName(newObject.getName());
-//            logger.info("testing 12");
-//            logger.info(existingObject.toString());
-//            // Object already exists, associate the existing one
-//            uniqueObjects.addAll(existingObject); // Add the existing object to the list
-//        }
-//        return objectEntities;
-//    }
 }
