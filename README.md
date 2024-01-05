@@ -1,1 +1,0 @@
-# Image Object Detector - Java
