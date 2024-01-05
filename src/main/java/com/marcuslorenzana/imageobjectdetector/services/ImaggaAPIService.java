@@ -41,9 +41,12 @@ public class ImaggaAPIService {
             String jsonResponse = connectionInput.readLine();
             connectionInput.close();
             List<ImaggaApiTagItem> tagItems = retrieveTagsFromResponse(jsonResponse);
-            List<ObjectEntity> objectEntities = tagItems.stream()
-                    .map(TagItemToObjectEntityMapper::map)
-                    .collect(Collectors.toList());
+            List<ObjectEntity> objectEntities = null;
+            if (tagItems != null) {
+                objectEntities = tagItems.stream()
+                        .map(TagItemToObjectEntityMapper::map)
+                        .toList();
+            }
             logger.info(objectEntities.get(0).toString());
         } catch (Exception e) {
             System.out.println(e);
