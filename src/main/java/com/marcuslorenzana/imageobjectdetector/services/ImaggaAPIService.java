@@ -31,6 +31,11 @@ public class ImaggaAPIService {
 
     Logger logger = LoggerFactory.getLogger(ImaggaAPIService.class);
 
+    /**
+     * Uses Imagga API to retrieve objects from an image.
+     * @param imageRequestData: ImageMetadataRequest
+     * @return ImageMetadataEntity
+     */
     public ImageMetadataEntity retrieveObjectsFromImage(ImageMetadataRequest imageRequestData) {
         String tagsUrl = getTagsUrl(imageRequestData.getImageSource());
         try {
@@ -58,12 +63,22 @@ public class ImaggaAPIService {
         }
     }
 
+    /**
+     * Constructs url for fetching objects against the image.
+     * @param imageSource: String
+     * @return String
+     */
     private String getTagsUrl(String imageSource) {
         String tagsBaseUrl =  String.format("%s/v2/tags", imaggaBaseUrl);
         return tagsBaseUrl + "?image_url=" + imageSource + "&limit=" + ImaggaConstants.TAG_LIMIT +
                 "&threshold=" + ImaggaConstants.CONFIDENCE_THRESHOLD;
     }
 
+    /**
+     * Retrieves the tags from the JSON response and returns back the tags
+     * @param jsonResponse: String
+     * @return List<ImaggaApiTagItem>
+     */
     private List<ImaggaApiTagItem> retrieveTagsFromResponse(String jsonResponse) {
         ObjectMapper mapper = new ObjectMapper();
         try {

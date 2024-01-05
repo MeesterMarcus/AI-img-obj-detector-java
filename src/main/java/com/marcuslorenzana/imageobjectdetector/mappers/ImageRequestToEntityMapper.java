@@ -6,6 +6,9 @@ import com.marcuslorenzana.imageobjectdetector.models.ImageMetadataRequest;
 
 import java.util.List;
 
+/**
+ * Maps an ImageMetadataRequest model to a ImageMetadataEntity
+ */
 public class ImageRequestToEntityMapper {
     public static ImageMetadataEntity map(ImageMetadataRequest metadataRequest, List<ObjectEntity> objectEntityList) {
         ImageMetadataEntity entity = new ImageMetadataEntity();

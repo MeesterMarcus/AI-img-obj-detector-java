@@ -1,8 +1,8 @@
 package com.marcuslorenzana.imageobjectdetector.entities;
 
-import java.util.List;
-
 import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 public class ImageMetadataEntity {

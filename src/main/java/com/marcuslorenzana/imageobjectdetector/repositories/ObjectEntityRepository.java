@@ -6,6 +6,9 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+/**
+ * Repository to interfact with ObjectEntity data.
+ */
 @Repository
 public interface ObjectEntityRepository extends JpaRepository<ObjectEntity, Long> {
     List<ObjectEntity> findByName(String name);

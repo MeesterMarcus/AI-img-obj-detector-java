@@ -7,6 +7,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * Controller to handle retrieving all images (optionally by object names), retrieve image by id, and creating an image
+ * with objects detected (if enabled).
+ */
 @RestController
 @RequestMapping("api/image")
 public class ImageController {
