@@ -1,8 +1,11 @@
 package com.marcuslorenzana.imageobjectdetector.services;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.marcuslorenzana.imageobjectdetector.entities.ImageMetadataEntity;
 import com.marcuslorenzana.imageobjectdetector.entities.ObjectEntity;
+import com.marcuslorenzana.imageobjectdetector.mappers.ImageMetadataRequestToImageMetadataEntityMapper;
 import com.marcuslorenzana.imageobjectdetector.mappers.TagItemToObjectEntityMapper;
+import com.marcuslorenzana.imageobjectdetector.models.ImageMetadataRequest;
 import com.marcuslorenzana.imageobjectdetector.models.ImaggaApiResponse;
 import com.marcuslorenzana.imageobjectdetector.models.ImaggaApiTagItem;
 import org.slf4j.Logger;
@@ -15,7 +18,6 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class ImaggaAPIService {
@@ -28,8 +30,8 @@ public class ImaggaAPIService {
 
     Logger logger = LoggerFactory.getLogger(ImaggaAPIService.class);
 
-    public void retrieveObjectsFromImage(String imageSource) {
-        String tagsUrl = getTagsUrl(imageSource);
+    public ImageMetadataEntity retrieveObjectsFromImage(ImageMetadataRequest imageRequestData) {
+        String tagsUrl = getTagsUrl(imageRequestData.getImageSource());
         try {
             URL urlObject = new URL(tagsUrl);
             HttpURLConnection connection = (HttpURLConnection) urlObject.openConnection();
@@ -47,16 +49,17 @@ public class ImaggaAPIService {
                         .map(TagItemToObjectEntityMapper::map)
                         .toList();
             }
-            logger.info(objectEntities.get(0).toString());
+            return ImageMetadataRequestToImageMetadataEntityMapper.map(imageRequestData, objectEntities);
         } catch (Exception e) {
             System.out.println(e);
             logger.error("Unable to process image.");
+            return null;
         }
     }
 
     private String getTagsUrl(String imageSource) {
         String tagsBaseUrl =  String.format("%s/v2/tags", imaggaBaseUrl);
-        return tagsBaseUrl + "?image_url=" + imageSource;
+        return tagsBaseUrl + "?image_url=" + imageSource + "&limit=5&threshold=9";
     }
 
     private List<ImaggaApiTagItem> retrieveTagsFromResponse(String jsonResponse) {
@@ -70,4 +73,6 @@ public class ImaggaAPIService {
             return null;
         }
     }
+
+
 }

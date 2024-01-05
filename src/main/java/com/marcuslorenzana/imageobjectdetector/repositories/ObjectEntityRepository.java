@@ -8,4 +8,5 @@ import java.util.List;
 
 @Repository
 public interface ObjectEntityRepository extends JpaRepository<ObjectEntity, Long> {
+    List<ObjectEntity> findByName(String name);
 }

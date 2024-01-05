@@ -1,16 +1,14 @@
 package com.marcuslorenzana.imageobjectdetector.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
-@Entity
+@Entity(name = "objects")
 public class ObjectEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Column(unique = true)
     private String name;
 
     // Standard getters and setters

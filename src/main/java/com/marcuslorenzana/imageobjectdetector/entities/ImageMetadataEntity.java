@@ -1,8 +1,8 @@
 package com.marcuslorenzana.imageobjectdetector.entities;
 
-import jakarta.persistence.*;
-
 import java.util.List;
+
+import jakarta.persistence.*;
 
 @Entity
 public class ImageMetadataEntity {
@@ -14,7 +14,7 @@ public class ImageMetadataEntity {
     private String imageSource;
     private String label;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "image_object_mapping",
             joinColumns = @JoinColumn(name = "image_id"),
@@ -56,5 +56,13 @@ public class ImageMetadataEntity {
         this.objects = objects;
     }
 
-    // toString method if needed
+    @Override
+    public String toString() {
+        return "ImageMetadataEntity{" +
+                "id=" + id +
+                ", imageSource='" + imageSource + '\'' +
+                ", label='" + label + '\'' +
+                ", objects=" + objects +
+                '}';
+    }
 }

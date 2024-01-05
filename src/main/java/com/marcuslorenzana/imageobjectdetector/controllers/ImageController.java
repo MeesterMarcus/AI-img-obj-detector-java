@@ -28,7 +28,7 @@ public class ImageController {
     }
 
     @PostMapping()
-    public ImageMetadataRequest createImage(@RequestBody ImageMetadataRequest image) {
+    public ImageMetadataEntity createImage(@RequestBody ImageMetadataRequest image) {
         return this.imageService.createImage(image);
     }
 }
