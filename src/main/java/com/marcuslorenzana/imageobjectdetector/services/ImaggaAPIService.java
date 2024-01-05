@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.marcuslorenzana.imageobjectdetector.constants.ImaggaConstants;
 import com.marcuslorenzana.imageobjectdetector.entities.ImageMetadataEntity;
 import com.marcuslorenzana.imageobjectdetector.entities.ObjectEntity;
-import com.marcuslorenzana.imageobjectdetector.mappers.ImageMetadataRequestToImageMetadataEntityMapper;
+import com.marcuslorenzana.imageobjectdetector.mappers.ImageRequestToEntityMapper;
 import com.marcuslorenzana.imageobjectdetector.mappers.TagItemToObjectEntityMapper;
 import com.marcuslorenzana.imageobjectdetector.models.ImageMetadataRequest;
 import com.marcuslorenzana.imageobjectdetector.models.ImaggaApiResponse;
@@ -50,7 +50,7 @@ public class ImaggaAPIService {
                         .map(TagItemToObjectEntityMapper::map)
                         .toList();
             }
-            return ImageMetadataRequestToImageMetadataEntityMapper.map(imageRequestData, objectEntities);
+            return ImageRequestToEntityMapper.map(imageRequestData, objectEntities);
         } catch (Exception e) {
             System.out.println(e);
             logger.error("Unable to process image.");
