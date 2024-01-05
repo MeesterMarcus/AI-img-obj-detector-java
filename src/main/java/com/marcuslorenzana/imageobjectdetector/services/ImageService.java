@@ -1,6 +1,8 @@
 package com.marcuslorenzana.imageobjectdetector.services;
 
-import com.marcuslorenzana.imageobjectdetector.models.ImageMetadata;
+import com.marcuslorenzana.imageobjectdetector.entities.ImageMetadataEntity;
+import com.marcuslorenzana.imageobjectdetector.models.ImageMetadataRequest;
+import com.marcuslorenzana.imageobjectdetector.repositories.ImageMetadataEntityRepository;
 import org.springframework.stereotype.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,20 +16,24 @@ public class ImageService {
 
     private final ImaggaAPIService imaggaAPIService;
 
-    public ImageService(ImaggaAPIService imaggaAPIService) {
+    private final ImageMetadataEntityRepository imageMetadataEntityRepository;
+
+    public ImageService(ImaggaAPIService imaggaAPIService, ImageMetadataEntityRepository imageMetadataEntityRepository) {
         this.imaggaAPIService = imaggaAPIService;
+        this.imageMetadataEntityRepository = imageMetadataEntityRepository;
     }
 
-    public List<ImageMetadata> getAllImages(String objects) {
-        List<ImageMetadata> images = new ArrayList<>();
+    public List<ImageMetadataEntity> getAllImages(String objects) {
+        List<ImageMetadataEntity> images = this.imageMetadataEntityRepository.findAll();
+        logger.info(images.toString());
         return images;
     }
 
-    public ImageMetadata getImageById(String itemId) {
+    public ImageMetadataRequest getImageById(String itemId) {
         return null;
     }
 
-    public ImageMetadata createImage(ImageMetadata image) {
+    public ImageMetadataRequest createImage(ImageMetadataRequest image) {
         this.imaggaAPIService.retrieveObjectsFromImage((image.getImageSource()));
         return image;
     }

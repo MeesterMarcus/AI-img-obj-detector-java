@@ -1,6 +1,7 @@
 package com.marcuslorenzana.imageobjectdetector.controllers;
 
-import com.marcuslorenzana.imageobjectdetector.models.ImageMetadata;
+import com.marcuslorenzana.imageobjectdetector.entities.ImageMetadataEntity;
+import com.marcuslorenzana.imageobjectdetector.models.ImageMetadataRequest;
 import com.marcuslorenzana.imageobjectdetector.services.ImageService;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,17 +18,17 @@ public class ImageController {
     }
 
     @GetMapping()
-    public List<ImageMetadata> getAllImages(@RequestParam(value="objects", required = false) String objects) {
+    public List<ImageMetadataEntity> getAllImages(@RequestParam(value="objects", required = false) String objects) {
         return this.imageService.getAllImages(objects);
     }
 
     @GetMapping("{id}")
-    public ImageMetadata getImageById(@PathVariable("id") String itemId) {
+    public ImageMetadataRequest getImageById(@PathVariable("id") String itemId) {
         return this.imageService.getImageById(itemId);
     }
 
     @PostMapping()
-    public ImageMetadata createImage(@RequestBody ImageMetadata image) {
+    public ImageMetadataRequest createImage(@RequestBody ImageMetadataRequest image) {
         return this.imageService.createImage(image);
     }
 }

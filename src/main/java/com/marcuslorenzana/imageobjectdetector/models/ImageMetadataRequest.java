@@ -1,10 +1,8 @@
 package com.marcuslorenzana.imageobjectdetector.models;
 
-import java.util.List;
 
-public class ImageMetadata {
+public class ImageMetadataRequest {
     String imageSource;
-    List<String> objects;
     String label;
     Boolean enableObjectDetection;
     Boolean dryRun;
@@ -15,15 +13,6 @@ public class ImageMetadata {
 
     public void setImageSource(String imageSource) {
         this.imageSource = imageSource;
-    }
-
-
-    public List<String> getObjects() {
-        return objects;
-    }
-
-    public void setObjects(List<String> objects) {
-        this.objects = objects;
     }
 
     public String getLabel() {
@@ -54,7 +43,6 @@ public class ImageMetadata {
     public String toString() {
         return "ImageMetadata{" +
                 "imageSource='" + imageSource + '\'' +
-                ", objects=" + objects +
                 ", label='" + label + '\'' +
                 ", enableObjectDetection=" + enableObjectDetection +
                 ", dryRun=" + dryRun +
