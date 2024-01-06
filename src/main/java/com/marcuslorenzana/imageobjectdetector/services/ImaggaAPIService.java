@@ -5,7 +5,7 @@ import com.marcuslorenzana.imageobjectdetector.entities.ObjectEntity;
 import com.marcuslorenzana.imageobjectdetector.mappers.ImageRequestToEntityMapper;
 import com.marcuslorenzana.imageobjectdetector.mappers.TagItemToObjectEntityMapper;
 import com.marcuslorenzana.imageobjectdetector.models.ImageMetadataRequest;
-import com.marcuslorenzana.imageobjectdetector.models.ImaggaApiTagItem;
+import com.marcuslorenzana.imageobjectdetector.models.imagga.ImaggaApiTagItem;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;

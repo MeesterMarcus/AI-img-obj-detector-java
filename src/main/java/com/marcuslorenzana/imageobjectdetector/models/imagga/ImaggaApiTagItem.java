@@ -1,4 +1,4 @@
-package com.marcuslorenzana.imageobjectdetector.models;
+package com.marcuslorenzana.imageobjectdetector.models.imagga;
 
 public class ImaggaApiTagItem {
     private double confidence;

@@ -3,8 +3,8 @@ package com.marcuslorenzana.imageobjectdetector.utilities;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.marcuslorenzana.imageobjectdetector.constants.ImaggaConstants;
-import com.marcuslorenzana.imageobjectdetector.models.ImaggaApiResponse;
-import com.marcuslorenzana.imageobjectdetector.models.ImaggaApiTagItem;
+import com.marcuslorenzana.imageobjectdetector.models.imagga.ImaggaApiResponse;
+import com.marcuslorenzana.imageobjectdetector.models.imagga.ImaggaApiTagItem;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 

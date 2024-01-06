@@ -1,7 +1,7 @@
 package com.marcuslorenzana.imageobjectdetector.mappers;
 
 import com.marcuslorenzana.imageobjectdetector.entities.ObjectEntity;
-import com.marcuslorenzana.imageobjectdetector.models.ImaggaApiTagItem;
+import com.marcuslorenzana.imageobjectdetector.models.imagga.ImaggaApiTagItem;
 
 /**
  * Maps a Imagga TagItem to an ObjectEntity

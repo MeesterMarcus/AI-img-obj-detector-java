@@ -14,6 +14,9 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * A global exception handler to gracefully catch errors and return useful responses.
+ */
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
@@ -49,7 +52,6 @@ public class GlobalExceptionHandler {
         Map<String, String> response = new HashMap<>();
         response.put("error", MessageConstants.IMAGE_PROCESSING_EXCEPTION_ERROR);
         response.put("message", MessageConstants.IMAGE_PROCESSING_EXCEPTION_MSG);
-        ex.printStackTrace();
         return ResponseEntity
                 .status(HttpStatus.BAD_REQUEST)
                 .body(response);
