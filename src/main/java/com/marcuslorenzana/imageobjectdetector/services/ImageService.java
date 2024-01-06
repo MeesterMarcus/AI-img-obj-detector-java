@@ -16,7 +16,8 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
+
+import static com.marcuslorenzana.imageobjectdetector.utilities.ImaggaAPIUtils.generateLabelFromFilename;
 
 /**
  * Service to handle business logic of CRUD operations on ImageMetadataEntity. Interacts with ImaggaAPIService
@@ -86,8 +87,8 @@ public class ImageService {
     public ImageMetadataModel createImage(ImageMetadataRequest image) throws IOException {
         ImageMetadataEntity entity = null;
         if (image.getLabel() == null || image.getLabel().isEmpty()) {
-            UUID uuid = UUID.randomUUID();
-            image.setLabel(uuid.toString());
+            String generatedLabel = generateLabelFromFilename(image.getImageSource());
+            image.setLabel(generatedLabel);
         }
         if (image.getEnableObjectDetection()) {
             entity = this.imaggaAPIService.retrieveObjectsFromImage(image);

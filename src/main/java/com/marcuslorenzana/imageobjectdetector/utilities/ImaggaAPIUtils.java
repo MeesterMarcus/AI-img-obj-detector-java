@@ -42,4 +42,15 @@ public class ImaggaAPIUtils {
         return tagsBaseUrl + "?image_url=" + imageSource + "&limit=" + ImaggaConstants.TAG_LIMIT +
                 "&threshold=" + ImaggaConstants.CONFIDENCE_THRESHOLD;
     }
+
+    /**
+     * Create a label based on the filename of the image.
+     *
+     * @param imageSource: String
+     * @return String
+     */
+    public static String generateLabelFromFilename(String imageSource) {
+        String regex = ".*/([^/]*)\\.[^.]*$";
+        return imageSource.replaceAll(regex, "$1");
+    }
 }
