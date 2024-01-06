@@ -22,8 +22,6 @@ public class ImageMetadataEntity {
     )
     private List<ObjectEntity> objects;
 
-    // Standard getters and setters
-
     public Long getId() {
         return id;
     }

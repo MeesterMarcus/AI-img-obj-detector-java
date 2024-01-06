@@ -57,7 +57,6 @@ public class ImaggaAPIService {
             }
             return ImageRequestToEntityMapper.map(imageRequestData, objectEntities);
         } catch (Exception e) {
-            System.out.println(e);
             logger.error("Unable to process image.");
             return null;
         }
@@ -83,8 +82,7 @@ public class ImaggaAPIService {
         ObjectMapper mapper = new ObjectMapper();
         try {
             ImaggaApiResponse apiResponse = mapper.readValue(jsonResponse, ImaggaApiResponse.class);
-            List<ImaggaApiTagItem> tags = apiResponse.getResult().getTags();
-            return tags;
+            return apiResponse.getResult().getTags();
         } catch (Exception e) {
             logger.error("Error trying to retrieve objects from image");
             return null;

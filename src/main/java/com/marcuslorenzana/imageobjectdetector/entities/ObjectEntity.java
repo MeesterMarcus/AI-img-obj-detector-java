@@ -11,8 +11,6 @@ public class ObjectEntity {
     @Column(unique = true)
     private String name;
 
-    // Standard getters and setters
-
     public Long getId() {
         return id;
     }

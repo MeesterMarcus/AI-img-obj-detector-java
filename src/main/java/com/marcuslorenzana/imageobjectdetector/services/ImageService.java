@@ -48,8 +48,6 @@ public class ImageService {
         } else {
             images = this.imageMetadataEntityRepository.findAll();
         }
-
-        logger.info(images.toString());
         return images;
     }
 
@@ -61,7 +59,7 @@ public class ImageService {
     public ImageMetadataEntity getImageById(long id) {
         Optional<ImageMetadataEntity> entity = this.imageMetadataEntityRepository.findById(id);
         if (entity.isPresent()) {
-            return entity.get(); // If the entity is present, return it
+            return entity.get();
         } else {
             logger.info("Could not find the image with ID " + id + " in the DB.");
             return null;

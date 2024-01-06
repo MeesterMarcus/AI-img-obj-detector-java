@@ -1,8 +1,15 @@
 package com.marcuslorenzana.imageobjectdetector.models;
 
 
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
+
 public class ImageMetadataRequest {
+    @NotNull
     String imageSource;
+    @Min(1)
+    @Max(120)
     String label;
     Boolean enableObjectDetection;
     Boolean dryRun;
