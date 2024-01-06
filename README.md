@@ -34,5 +34,5 @@ Here are some ways to interact with the service:
 
 ### Note
 
-Ensure that your environment is correctly set up with Java 18 and Maven before attempting to run the application. Enjoy detecting objects in images!
+Ensure that your environment is correctly set up with Java 18 and Maven before attempting to run the application.
 
