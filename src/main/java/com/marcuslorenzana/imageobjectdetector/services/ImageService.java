@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 /**
  * Service to handle business logic of CRUD operations on ImageMetadataEntity. Interacts with ImaggaAPIService
@@ -84,6 +85,10 @@ public class ImageService {
     @Transactional
     public ImageMetadataModel createImage(ImageMetadataRequest image) throws IOException {
         ImageMetadataEntity entity = null;
+        if (image.getLabel() == null || image.getLabel().isEmpty()) {
+            UUID uuid = UUID.randomUUID();
+            image.setLabel(uuid.toString());
+        }
         if (image.getEnableObjectDetection()) {
             entity = this.imaggaAPIService.retrieveObjectsFromImage(image);
             List<ObjectEntity> objectEntities = this.objectEntityRepository.saveAllAndFlush(entity.getObjects());
