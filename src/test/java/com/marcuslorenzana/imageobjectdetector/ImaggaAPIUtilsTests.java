@@ -25,9 +25,8 @@ public class ImaggaAPIUtilsTests {
     public void testRetrieveTagsFromInvalidResponse() {
         String invalidJsonResponse = "Invalid JSON";
 
-        Exception exception = assertThrows(JsonProcessingException.class, () -> {
-            ImaggaAPIUtils.retrieveTagsFromResponse(invalidJsonResponse);
-        });
+        Exception exception = assertThrows(JsonProcessingException.class, () ->
+                ImaggaAPIUtils.retrieveTagsFromResponse(invalidJsonResponse));
 
         String expectedMessage = "Unrecognized token";
         String actualMessage = exception.getMessage();
@@ -39,9 +38,8 @@ public class ImaggaAPIUtilsTests {
     public void testRetrieveTagsFromEmptyResponse() {
         String emptyJsonResponse = "";
 
-        Exception exception = assertThrows(JsonProcessingException.class, () -> {
-            ImaggaAPIUtils.retrieveTagsFromResponse(emptyJsonResponse);
-        });
+        Exception exception = assertThrows(JsonProcessingException.class, () ->
+                ImaggaAPIUtils.retrieveTagsFromResponse(emptyJsonResponse));
 
         assertNotNull(exception);
     }
