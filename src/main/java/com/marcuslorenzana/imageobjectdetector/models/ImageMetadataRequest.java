@@ -1,15 +1,12 @@
 package com.marcuslorenzana.imageobjectdetector.models;
 
-
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 public class ImageMetadataRequest {
     @NotNull
     String imageSource;
-    @Min(1)
-    @Max(120)
+    @Size(min = 1, max = 120, message = "The label field cannot be empty or cannot exceed 120 characters")
     String label;
     Boolean enableObjectDetection;
     Boolean dryRun;

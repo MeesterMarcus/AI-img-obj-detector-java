@@ -1,25 +1,15 @@
-package com.marcuslorenzana.imageobjectdetector.entities;
+package com.marcuslorenzana.imageobjectdetector.models;
 
-import jakarta.persistence.*;
+import com.marcuslorenzana.imageobjectdetector.entities.ObjectEntity;
 
 import java.util.List;
 
-@Entity
-public class ImageMetadataEntity {
+public class ImageMetadataModel {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
     private String imageSource;
     private String label;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "image_object_mapping",
-            joinColumns = @JoinColumn(name = "image_id"),
-            inverseJoinColumns = @JoinColumn(name = "object_id")
-    )
     private List<ObjectEntity> objects;
 
     public Long getId() {
@@ -56,7 +46,7 @@ public class ImageMetadataEntity {
 
     @Override
     public String toString() {
-        return "ImageMetadataEntity{" +
+        return "ImageMetadataModel{" +
                 "id=" + id +
                 ", imageSource='" + imageSource + '\'' +
                 ", label='" + label + '\'' +

@@ -1,10 +1,12 @@
 package com.marcuslorenzana.imageobjectdetector.controllers;
 
-import com.marcuslorenzana.imageobjectdetector.entities.ImageMetadataEntity;
+import com.marcuslorenzana.imageobjectdetector.models.ImageMetadataModel;
 import com.marcuslorenzana.imageobjectdetector.models.ImageMetadataRequest;
 import com.marcuslorenzana.imageobjectdetector.services.ImageService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -22,17 +24,17 @@ public class ImageController {
     }
 
     @GetMapping()
-    public List<ImageMetadataEntity> getAllImages(@RequestParam(value="objects", required = false) String objects) {
+    public List<ImageMetadataModel> getAllImages(@RequestParam(value = "objects", required = false) String objects) {
         return this.imageService.getAllImages(objects);
     }
 
     @GetMapping("{id}")
-    public ImageMetadataEntity getImageById(@PathVariable("id") Long itemId) {
+    public ImageMetadataModel getImageById(@PathVariable("id") Long itemId) {
         return this.imageService.getImageById(itemId);
     }
 
     @PostMapping()
-    public ImageMetadataEntity createImage(@RequestBody ImageMetadataRequest image) {
+    public ImageMetadataModel createImage(@RequestBody @Valid ImageMetadataRequest image) throws IOException {
         return this.imageService.createImage(image);
     }
 }
