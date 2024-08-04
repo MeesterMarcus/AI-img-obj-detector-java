@@ -1,4 +1,4 @@
-# Image Object Detector - Java
+# AI Image Object Detector - Java
 
 This API allows a user to store image data as well as objects detected within the images while leveraging the Imagga
 API.
